@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Dashboard Payroll Operations Health Score (#738)**: Adds a 0-100 health score card to the main dashboard with a Healthy / Needs attention / Critical band and actionable contributing factors (failed, stuck pending and paused runs, reconciliation discrepancies, treasury funding against the next run).
+  - Pure scoring module `lib/payroll/operationsHealth.ts`; malformed runs and invalid funding values are excluded and reported, and an empty history returns an insufficient-data state instead of a score
+  - Card `components/features/dashboard/DashboardPayrollOperationsHealthCard.tsx`, mounted in `DashboardHome`
+  - Feature notes in `docs/PAYROLL_OPERATIONS_HEALTH.md`
+
 - **Dashboard Organization Settings Validation History**: Records a privacy-safe, capped history of organization settings validation runs in the dashboard layer.
   - Pure domain module `src/settings/validationHistory.ts` with `recordSettingsValidation` and `getSettingsValidationHistoryStats`, building on the existing `validateCompanyConfig` flow without modifying it
   - Entries capture `passed` / `failed` status, error and warning counts, failing check labels and messages, company id, and an ISO-8601 timestamp; wallet addresses, salary figures, and employee data never enter an entry
